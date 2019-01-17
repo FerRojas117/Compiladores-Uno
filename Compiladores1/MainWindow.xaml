@@ -35,7 +35,7 @@
                 <RowDefinition Height="2*"/>
             </Grid.RowDefinitions>
             <Label x:Name="label1" Content="Label" HorizontalAlignment="Left" Margin="180,51,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.342,0.231" Grid.Row="1" Grid.RowSpan="2"/>
-            <TextBox x:Name="textBox1" HorizontalAlignment="Left" Height="295" VerticalScrollBarVisibility="Visible" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="403" Grid.RowSpan="3"/>
+            <Canvas HorizontalAlignment="Left" Height="295" Margin="10,10,0,0" Grid.RowSpan="3" VerticalAlignment="Top" Width="393"/>
         </Grid>
         <Grid Grid.Column="2" HorizontalAlignment="Left" Background="Gray" Height="116" Margin="217,33,0,0" Grid.Row="1" VerticalAlignment="Top" Width="423" Grid.ColumnSpan="2">
             <Grid.ColumnDefinitions>
@@ -43,7 +43,7 @@
                 <ColumnDefinition Width="76*"/>
                 <ColumnDefinition Width="8*"/>
             </Grid.ColumnDefinitions>
-            <TextBox x:Name="textBox3" VerticalScrollBarVisibility="Visible" HorizontalAlignment="Left" Height="96" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="403" Grid.ColumnSpan="2"/>
+            <TextBox x:Name="textBox3" VerticalScrollBarVisibility="Visible" HorizontalAlignment="Left" Height="96" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="403" Grid.ColumnSpan="2" x:FieldModifier="public"/>
         </Grid>
     </Grid>
 </Window>

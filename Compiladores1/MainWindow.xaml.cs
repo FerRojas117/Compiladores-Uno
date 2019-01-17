@@ -23,9 +23,10 @@ namespace Compiladores1
     /// </summary>
     public partial class MainWindow : Window
     {
-        private const string Pattern = @"(?<=[+\-])";
-        private Compiler compilador;
-        
+        private const string Pattern = @"^[a-zA-Z][a-zA-Z0-9]*$";
+
+        Compilador compilador = new Compilador();
+
         public MainWindow()
         {
             InitializeComponent();
@@ -52,22 +53,34 @@ namespace Compiladores1
         {
             string[] tokens;
             string codigo = textBox.Text;
-            tokens = Regex.Split(codigo, Pattern);
+            tokens = codigo.Split('\r', '\n', ' ', '\0');
             if(tokens.Length == 0)
             {
-                string sinTokens = "El editor está vacío.";
+                string sinTokens = "El editor está vacío.";    
                 MessageBox.Show(sinTokens);
                 return;
             }
-          
-
-            
-            foreach(string s in tokens)
+            /*foreach(string s in tokens)
             {
-                textBox1.AppendText(s);
-                textBox1.AppendText("\n");
+                if (string.IsNullOrEmpty(s))
+                {
+                    Console.WriteLine("Empty");
+                    continue;
+                }
+                Console.WriteLine("WORD:" + s + "/");
             }
-            
+            */
+           compilador.automata(tokens);
+        }
+
+        public void setTextBox3 (string cadena)
+        {
+            textBox3.AppendText(cadena);
+        }
+
+        private void TextBox1_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
         }
     }
 
