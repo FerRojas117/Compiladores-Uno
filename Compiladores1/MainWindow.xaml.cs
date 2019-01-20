@@ -15,9 +15,35 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.Win32;
 using System.Text.RegularExpressions;
+using System.Collections.Specialized;
 
 namespace Compiladores1
 {
+    class Lineas
+    {
+        public List<int> linea = new List<int>();
+        public List<string> token = new List<string>();
+        public List<string[]> tokens = new List<string[]>();
+
+        public void addLinea(int noLinea, string linea)
+        {
+            string[] tokens = linea.Split('\r', '\n', ' ', '\0');
+            this.linea.Add(noLinea);
+            this.token.Add(linea);
+            this.tokens.Add(tokens);
+        }
+
+        public int getSize()
+        {
+            return linea.Count;
+        }
+
+        public int getSizeArrayTokens()
+        {
+            return tokens.Count;
+        }
+    }
+    
     /// <summary>
     /// Lógica de interacción para MainWindow.xaml
     /// </summary>
@@ -51,26 +77,27 @@ namespace Compiladores1
 
         private void Button1_Click(object sender, RoutedEventArgs e)
         {
-            string[] tokens;
             string codigo = textBox.Text;
-            tokens = codigo.Split('\r', '\n', ' ', '\0');
-            if(tokens.Length == 0)
+            Lineas l = new Lineas();
+            int contadorLineas = textBox.LineCount;
+            for(int i = 0; i < contadorLineas; i++)
             {
-                string sinTokens = "El editor está vacío.";    
-                MessageBox.Show(sinTokens);
-                return;
+                l.addLinea(i + 1, textBox.GetLineText(i));
             }
-            /*foreach(string s in tokens)
+            int elementos = l.getSize();
+            /*
+            for (int i = 0; i < elementos; i++)
             {
-                if (string.IsNullOrEmpty(s))
+                Console.WriteLine("Linea " + l.linea[i] + ": " + l.token[i]);
+                Console.Write("Tokens en linea: ");
+                foreach (string s in l.tokens[i])
                 {
-                    Console.WriteLine("Empty");
-                    continue;
+                    Console.Write( s + " " );
                 }
-                Console.WriteLine("WORD:" + s + "/");
+                Console.WriteLine();
             }
             */
-           compilador.automata(tokens);
+            compilador.automata(ref l, elementos);
         }
 
         public void setTextBox3 (string cadena)
